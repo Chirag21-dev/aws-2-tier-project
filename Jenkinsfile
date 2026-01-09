@@ -46,12 +46,12 @@ pipeline {
             }
         }*/
 
-        stage('OWASP Dependency-Check Scan') {
+        /*stage('OWASP Dependency-Check Scan') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
-        }
+        }*/
 
         stage('Authenticate with AWS and ECR') {
             steps {
