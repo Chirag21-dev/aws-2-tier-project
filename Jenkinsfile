@@ -51,7 +51,7 @@ pipeline {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
-        }*/
+        } */
 
         stage('Authenticate with AWS and ECR') {
             steps {
@@ -176,6 +176,6 @@ pipeline {
                     """
                 }
             }
-        }*/
+        } */
     }
 }
