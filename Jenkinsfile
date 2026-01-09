@@ -60,10 +60,10 @@ pipeline {
                     [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']
                 ]) {
                     sh '''
-                        echo "Authenticating with AWS..."
-                        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                        export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+                        //echo "Authenticating with AWS..."
+                        //export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                        //export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                        //export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
 
                         aws sts get-caller-identity
 
