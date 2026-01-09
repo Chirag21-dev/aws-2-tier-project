@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
-        AWS_ACCOUNT_ID     = '657001761946'
+        AWS_ACCOUNT_ID     = '231726701699'
         IMAGE_TAG          = "1.0.${BUILD_NUMBER}"
-        SCANNER_HOME       = tool 'sonar-scanner'
+        SCANNER_HOME       = tool 'Sonarqube'
         FRONTEND_ECR_URI   = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/frontend-repo"
         BACKEND_ECR_URI    = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/backend-repo"
     }
@@ -26,29 +26,29 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar-server') {
-                    sh """
-                        ${SCANNER_HOME}/bin/sonar-scanner \\
-                            -Dsonar.projectName=app \\
-                            -Dsonar.projectKey=app
-                    """
-                }
-            }
-        }
+        /*stage('SonarQube Analysis') {
+            #steps {
+                #withSonarQubeEnv('sonar-server') {
+                    #sh """
+                        #${SCANNER_HOME}/bin/sonar-scanner \\
+                            #-Dsonar.projectName=app \\
+                            #-Dsonar.projectKey=app
+                    #"""
+                #}
+            #}
+        }*/
 
-        stage('Quality Gate') {
+        /*stage('Quality Gate') {
             steps {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
                 }
             }
-        }
+        }*/
 
         stage('OWASP Dependency-Check Scan') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
@@ -126,7 +126,7 @@ pipeline {
             }
         }
 
-        stage('Clean Workspace for CD Repo') {
+         /*stage('Clean Workspace for CD Repo') {
             steps {
                 cleanWs()
             }
@@ -143,7 +143,7 @@ pipeline {
         stage('Update helm values.yaml with New Docker Image') {
             environment {
                 GIT_REPO_NAME = "aws-2-tier-helm-chart"
-                GIT_USER_NAME = "vijaygiduthuri"
+                GIT_USER_NAME = "Chirag21-dev"
             }
             steps {
                 withCredentials([usernamePassword(
@@ -176,6 +176,6 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
     }
 }
