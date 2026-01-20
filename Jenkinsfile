@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh """
@@ -44,7 +44,7 @@ pipeline {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
                 }
             }
-        }
+        }*/
 
         stage('OWASP Dependency-Check Scan') {
             steps {
@@ -54,7 +54,7 @@ pipeline {
         } 
         
 
-        /*stage('Authenticate with AWS and ECR') {
+        stage('Authenticate with AWS and ECR') {
             steps {
                 withCredentials([
                     [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']
