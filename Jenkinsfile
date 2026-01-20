@@ -26,35 +26,35 @@ pipeline {
             }
         }
 
-        /*stage('SonarQube Analysis') {
-            #steps {
-                #withSonarQubeEnv('sonar-server') {
-                    #sh """
-                        #${SCANNER_HOME}/bin/sonar-scanner \\
-                            #-Dsonar.projectName=app \\
-                            #-Dsonar.projectKey=app
-                    #"""
-                #}
-            #}
-        }*/
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \\
+                            -Dsonar.projectName=app \\
+                            -Dsonar.projectKey=app
+                    """
+                }
+            }
+        }
 
-        /*stage('Quality Gate') {
+        stage('Quality Gate') {
             steps {
                 script {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
                 }
             }
-        }*/
+        }
 
-        //stage('OWASP Dependency-Check Scan') {
-        //    steps {
-        //        dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
-        //        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //    }
-        //} 
+        stage('OWASP Dependency-Check Scan') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        } 
         
 
-        stage('Authenticate with AWS and ECR') {
+        /*stage('Authenticate with AWS and ECR') {
             steps {
                 withCredentials([
                     [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']
