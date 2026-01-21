@@ -137,8 +137,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'github-cred',
-                    usernameVariable: 'GIT_USERNAME',
-                    passwordVariable: 'GIT_PASSWORD'
+                    usernameVariable: 'github_user',
+                    passwordVariable: 'github_pass'
                 )]) {
                     sh """
                         set -e
