@@ -62,20 +62,8 @@ pipeline {
 
         stage('Authenticate with AWS and ECR') {
             steps {
-                withCredentials([
-                    [
-                     $class: 'AmazonWebServicesCredentialsBinding', 
-                     credentialsId: 'aws-credentials-id',
-                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                    ]
-                   ]) {
+                withAWS(credentials: 'aws-credentials-id', region: "${AWS_DEFAULT_REGION}") {
                     sh '''
-                        //echo "Authenticating with AWS..."
-                        //export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                        //export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                        //export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-
                         aws sts get-caller-identity
 
                         echo "Logging into ECR..."
