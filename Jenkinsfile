@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-east-1'
         AWS_ACCOUNT_ID     = '231726701699'
         IMAGE_TAG          = "1.0.${BUILD_NUMBER}"
-        SCANNER_HOME       = tool 'Sonarqube'
+        //SCANNER_HOME       = tool 'Sonarqube'
         FRONTEND_ECR_URI   = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/frontend-repo"
         BACKEND_ECR_URI    = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/backend-repo"
     }
