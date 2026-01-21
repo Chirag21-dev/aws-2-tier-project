@@ -63,7 +63,8 @@ pipeline {
         stage('Authenticate with AWS and ECR') {
             steps {
                 withCredentials([
-                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']
+                    [$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id',accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']
                 ]) {
                     sh '''
                         //echo "Authenticating with AWS..."
