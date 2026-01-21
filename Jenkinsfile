@@ -46,6 +46,12 @@ pipeline {
             }
         }*/
 
+        stage('Clean Dependency-Check DB') {
+      steps {
+            sh 'rm -rf ~/.dependency-check || true'
+              }
+              }
+
         stage('OWASP Dependency-Check Scan') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
