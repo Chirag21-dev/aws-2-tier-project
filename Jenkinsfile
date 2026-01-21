@@ -44,7 +44,7 @@ pipeline {
                     waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
                 }
             }
-        }*/
+        }
 
         stage('Clean Dependency-Check DB') {
       steps {
@@ -57,7 +57,7 @@ pipeline {
                 dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'Dp'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
-        } 
+        } */
         
 
         stage('Authenticate with AWS and ECR') {
