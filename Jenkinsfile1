@@ -137,14 +137,14 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'github-cred',
-                    usernameVariable: 'github_user',
-                    passwordVariable: 'github_pass'
+                    usernameVariable: 'GIT_USERNAME',
+                    passwordVariable: 'GIT_PASSWORD'
                 )]) {
                     sh """
                         set -e
 
                         git config user.email "chirag@example.com"
-                        git config user.name "${GIT_USER_NAME}"
+                        git config user.name "${GIT_USERNAME}"
 
                         echo "=== BEFORE ==="
                         cat helm-chart/values.yaml
